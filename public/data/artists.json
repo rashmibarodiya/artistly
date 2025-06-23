@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "Aarav Verma",
+    "category": "Singer",
+    "location": "Delhi",
+    "priceRange": "₹10k - ₹20k",
+    "image": "/artists/aarav.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Zara Khan",
+    "category": "DJ",
+    "location": "Mumbai",
+    "priceRange": "₹15k - ₹25k",
+    "image": "/artists/zara.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Nikhil Rao",
+    "category": "Speaker",
+    "location": "Bangalore",
+    "priceRange": "₹5k - ₹10k",
+    "image": "/artists/nikhil.jpg"
+  }
+]
