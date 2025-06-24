@@ -7,5 +7,5 @@ export async function submitArtist(data: ArtistFormData) {
   });
 
   // In real app: send to backend
-  // await fetch('/api/artist', { method: 'POST', body: ... })
+  // this data would be used to send a real a post request to backend using fetch or axios
 }

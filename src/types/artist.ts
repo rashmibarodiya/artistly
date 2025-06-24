@@ -4,6 +4,7 @@ import { InferType } from 'yup';
 
 
 export interface ArtistFormData {
+  id?:number;
   name: string;
   bio: string;
   location: string;

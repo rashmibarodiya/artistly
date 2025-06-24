@@ -2,25 +2,97 @@
   {
     "id": 1,
     "name": "Aarav Verma",
-    "category": "Singer",
+    "categories": ["Singer"],
     "location": "Delhi",
     "priceRange": "₹10k - ₹20k",
-    "image": "/artists/aarav.jpg"
+    "image": "/artist/aarav.jpg"
   },
   {
     "id": 2,
     "name": "Zara Khan",
-    "category": "DJ",
+    "categories": ["DJ", "Singer"],
     "location": "Mumbai",
     "priceRange": "₹15k - ₹25k",
-    "image": "/artists/zara.jpg"
+    "image": "/artist/zara.jpg"
   },
   {
     "id": 3,
     "name": "Nikhil Rao",
-    "category": "Speaker",
+    "categories": ["Speaker"],
     "location": "Bangalore",
     "priceRange": "₹5k - ₹10k",
-    "image": "/artists/nikhil.jpg"
+    "image": "/artist/speaker.jpg"
+  },
+  {
+    "id": 4,
+    "name": "Priya Sharma",
+    "categories": ["Singer", "Speaker"],
+    "location": "Kolkata",
+    "priceRange": "₹10k - ₹20k",
+    "image": "/artist/zara.jpg"
+  },
+  {
+    "id": 5,
+    "name": "Kabir Joshi",
+    "categories": ["DJ"],
+    "location": "Delhi",
+    "priceRange": "₹20k - ₹30k",
+    "image": "/artist/speaker.jpg"
+  },
+  {
+    "id": 6,
+    "name": "Meera Iyer",
+    "categories": ["Speaker", "DJ"],
+    "location": "Chennai",
+    "priceRange": "₹15k - ₹25k",
+    "image": "/artist/zara.jpg"
+  },
+  {
+    "id": 7,
+    "name": "Rohan Mehta",
+    "categories": ["Singer", "Dancer"],
+    "location": "Pune",
+    "priceRange": "₹5k - ₹10k",
+    "image": "/artist/aarav.jpg"
+  },
+  {
+    "id": 8,
+    "name": "Sanya Kapoor",
+    "categories": ["DJ", "Dancer"],
+    "location": "Hyderabad",
+    "priceRange": "₹10k - ₹20k",
+    "image": "/artist/zara.jpg"
+  },
+  {
+    "id": 9,
+    "name": "Dev Arora",
+    "categories": ["Speaker"],
+    "location": "Ahmedabad",
+    "priceRange": "₹5k - ₹10k",
+    "image": "/artist/speaker.jpg"
+  },
+  {
+    "id": 10,
+    "name": "Ishita Raj",
+    "categories": ["DJ", "Singer", "Speaker"],
+    "location": "Delhi",
+    "priceRange": "₹25k - ₹35k",
+    "image": "/artist/ishita.jpg"
+  },
+  {
+    "id": 11,
+    "name": "Neha Batra",
+    "categories": ["Dancer"],
+    "location": "Mumbai",
+    "priceRange": "₹15k - ₹25k",
+    "image": "/artist/zara.jpg"
+  },
+  {
+    "id": 12,
+    "name": "Tanisha Roy",
+    "categories": ["Dancer", "Speaker"],
+    "location": "Kolkata",
+    "priceRange": "₹10k - ₹15k",
+    "image": "/artist/zara.jpg"
   }
 ]
