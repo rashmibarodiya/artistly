@@ -6,11 +6,11 @@ import Link from 'next/link'
 
 export default function HomePage() {
   return (
-    <section className="space-y-10">
+    <section className="space-y-10 mt-16">
       {/* Hero Section */}
       <div className="text-center py-12">
-        <h1 className="text-4xl font-bold">Connect with Top Performing Artists</h1>
-        <p className="mt-4 text-lg text-gray-600">
+        <h1 className="text-5xl font-bold">Connect with Top Performing Artists</h1>
+        <p className="mt-4 text-2xl text-gray-600">
           Discover, shortlist, and book your perfect performer.
         </p>
         <Link

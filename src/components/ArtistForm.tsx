@@ -37,7 +37,7 @@ export default function OnboardForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 border-2 rounded p-4">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 border-2 rounded p-6">
         {/* Name */}
         <div>
           <label className="block font-medium">Name</label>

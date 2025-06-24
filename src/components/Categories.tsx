@@ -15,7 +15,7 @@ export default function Categories() {
       return (
 
         
-        < div className = "grid grid-cols-1 md:grid-cols-4 gap-8" >
+        < div className = "grid grid-cols-1 md:grid-cols-4 gap-8 mt-16" >
         {
             categories.map((cat) => (
                 <div

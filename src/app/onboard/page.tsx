@@ -3,7 +3,7 @@ import OnboardForm from '@/components/ArtistForm';
 export default function OnboardPage() {
   return (
     <section className="max-w-2xl mx-auto space-y-8">
-      <h1 className="text-3xl font-bold text-center">Onboard Artist</h1>
+      <h1 className="text-4xl font-bold text-center mt-4">Onboard Artist</h1>
       <OnboardForm />
     </section>
   );

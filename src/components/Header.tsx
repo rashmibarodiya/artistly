@@ -26,11 +26,18 @@ export default function Header() {
         </button>
 
         {/* Navigation Links - Desktop */}
-        <nav className="hidden md:flex space-x-6 text-xl font-medium">
-          <Link href="/" className="hover:underline">Home</Link>
-          <Link href="/artists" className="hover:underline">Browse Artists</Link>
-          <Link href="/onboard" className="hover:underline">Onboard Artist</Link>
+        <nav className="hidden md:flex space-x-6 text-2xl font-medium">
+          <Link href="/" className="hover:none transition-transform duration-200 hover:-translate-y-1">
+            Home
+          </Link>
+          <Link href="/artists" className="hover:none transition-transform duration-200 hover:-translate-y-1">
+            Browse Artists
+          </Link>
+          <Link href="/onboard" className="hover:none transition-transform duration-200 hover:-translate-y-1">
+            Onboard Artist
+          </Link>
         </nav>
+
       </div>
 
       {/* Navigation Links - Mobile */}
