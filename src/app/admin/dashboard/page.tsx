@@ -27,7 +27,7 @@ export default function Dashboard() {
         .then((data) => setArtists(data));
     }
     console.log("Artist are &&&&&&&&&&7",artists)
-  }, []);
+  }, [artists]);
 
   if (!isAdmin) return <p className="p-4 text-red-600">Access Denied. Admins only.</p>;
 

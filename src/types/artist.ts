@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 
-import { InferType } from 'yup';
+
 
 
 export interface ArtistFormData {
