@@ -50,7 +50,11 @@ const userId = new Types.ObjectId() // ⚠️ replace with real auth ASAP
 
     console.log("🎉 artist created:", artist._id.toString());
 
-    return artist;
+   return {
+  id: artist._id.toString(),
+  category: artist.category,
+  success : true
+};
   } catch (error) {
     console.error("❌ createArtist failed:", error);
     throw error; // NEVER swallow server errors

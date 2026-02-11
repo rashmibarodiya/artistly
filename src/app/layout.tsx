@@ -12,14 +12,13 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className="min-h-screen flex flex-col bg-white text-gray-800">
+      <body className="min-h-screen flex flex-col  ">
         <Providers>
-         <main className="flex-1 p-4">{children}</main>
+        <Header />
+         <main className="flex-1">{children}</main>
         <footer className="p-4 text-center text-sm text-gray-500 mt-8">© 2025 Artistly.com</footer> 
         </Providers>
-        <Header />
-        <main className="flex-1 p-4"><Providers>{children}</Providers></main>
-        <footer className="p-4 text-center text-sm text-gray-500 mt-8">© 2025 Artistly.com</footer>
+       
       </body>
     </html>
   )

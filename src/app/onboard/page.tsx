@@ -2,9 +2,20 @@ import OnboardForm from '@/components/ArtistForm';
 
 export default function OnboardPage() {
   return (
-    <section className="max-w-2xl mx-auto space-y-8">
-      <h1 className="text-4xl font-bold text-center mt-4">Onboard Artist</h1>
-      <OnboardForm />
+    <section className="relative min-h-[calc(100vh-80px)] flex items-center justify-center px-4 py-16 
+      bg-gradient-to-br from-purple-900 via-indigo-900 to-black overflow-hidden">
+
+      {/* Soft Glow Background */}
+      <div className="absolute top-[-100px] left-[-100px] w-[400px] h-[400px] bg-purple-600/30 rounded-full blur-3xl" />
+      <div className="absolute bottom-[-120px] right-[-100px] w-[400px] h-[400px] bg-pink-600/30 rounded-full blur-3xl" />
+
+      <div className="relative w-full max-w-3xl">
+        <h1 className="text-4xl md:text-5xl font-bold text-center text-white mb-10">
+          Step Into The Spotlight 🎤
+        </h1>
+
+        <OnboardForm />
+      </div>
     </section>
   );
 }
