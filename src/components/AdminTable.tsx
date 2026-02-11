@@ -1,4 +1,4 @@
-import { ArtistFormData } from '@/types/artist'
+import { ArtistFormData } from '@/app/types/artist'
 
 
 type Props = {

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import ArtistCard from '../../components/ArtistsCard'
-import { ArtistFormData } from '@/types/artist'
+import { ArtistFormData } from '@/app/types/artist'
 import Filter from "../../components/Filters"
 
 export default function ArtistListingPage() {

@@ -1,4 +1,4 @@
-import {ArtistFormData} from "../types/artist"
+import {ArtistFormData} from "../app/types/artist"
 
 export async function submitArtist(data: ArtistFormData) {
   console.log('Form submitted:', {

@@ -1,4 +1,4 @@
-import { ArtistFormData } from '@/types/artist'
+import { ArtistFormData } from '@/app/types/artist'
 
 export default function ArtistCard({ artist }: { artist: ArtistFormData }) {
   return (

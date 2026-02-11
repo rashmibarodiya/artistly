@@ -36,6 +36,9 @@ export default function Header() {
           <Link href="/onboard" className="hover:none transition-transform duration-200 hover:-translate-y-1">
             Onboard Artist
           </Link>
+          <Link href="/register" className="hover:none transition-transform duration-200 hover:-translate-y-1">
+            register
+          </Link>
         </nav>
 
       </div>

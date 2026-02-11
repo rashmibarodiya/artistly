@@ -1,5 +1,5 @@
 import SelectFilter from './SelectFilter'
-import { ArtistFilters } from '@/types/FilterTypes'
+import { ArtistFilters } from '@/app/types/FilterTypes'
 type FilterProps = {
   filters: ArtistFilters
   setFilters: React.Dispatch<React.SetStateAction<ArtistFilters>>

@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 import ArtistTable from '../../../components/AdminTable';
-import { ArtistFormData } from '@/types/artist'
+import { ArtistFormData } from '@/app/types/artist'
 
 // type Artist = {
 //   id: number;

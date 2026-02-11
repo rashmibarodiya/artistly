@@ -1,122 +1,161 @@
-'use client';
+'use client'
 
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { ArtistFormData } from '../types/artist';
-import { artistSchema } from '../types/artist';
-import { submitArtist } from '../api/addArtist';
-import { SubmitHandler } from 'react-hook-form';
+import "@uploadthing/react/styles.css"
+import { useForm } from "react-hook-form"
+import { yupResolver } from "@hookform/resolvers/yup"
+import { UploadButton } from "@uploadthing/react"
+import type { OurFileRouter } from "@/app/api/uploadthing/core"
+import { artistSchema } from "@/db/validators/artist"
+import { createArtist } from "@/db/actions/artist"
+import { useState } from "react"
+import type * as yup from "yup"
 
-const categories = ['Singer', 'Dancer', 'Speaker', 'DJ'];
-const languages = ['Hindi', 'English', 'Punjabi', 'Tamil'];
-const priceOptions = ['₹5k - ₹10k', '₹10k - ₹20k', '₹20k+'];
+/* 🔑 SINGLE SOURCE OF TRUTH */
+type ArtistFormData = yup.InferType<typeof artistSchema>
 
-export default function OnboardForm() {
+const categories = ["Singer", "Dancer", "DJ", "Band"]
+const genres = ["Bollywood", "Classical", "Rock", "Pop", "Hip Hop"]
+
+export default function ArtistForm() {
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null)
+
   const {
     register,
     handleSubmit,
-    reset,
+    setValue,
     formState: { errors },
   } = useForm<ArtistFormData>({
-    resolver: yupResolver(artistSchema) as any, // only for now  
+    resolver: yupResolver(artistSchema),
     defaultValues: {
-      name: '',
-      bio: '',
-      location: '',
-      priceRange: '',
-      categories: [],
-      languages: [],
-        // image:undefined,
+      category: "",
+      bio: "",
+      experienceYears: null, // ✅ always present, nullable
+      genres: [],
+      priceRange: {
+        min: 0,
+        max: 0,
+      },
+      media: {
+        profileImage: null,
+        videos: [],
+      },
     },
-  });
+  })
 
-  const onSubmit: SubmitHandler<ArtistFormData> = async (data) => {
-    await submitArtist(data);
-    alert('Artist submitted!');
-    reset();
-  };
+  const onSubmit = async (data: ArtistFormData) => {
+    console.log("🟢 Form submitted:", data)
+    await createArtist(data)
+  }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 border-2 rounded p-6">
-        {/* Name */}
-        <div>
-          <label className="block font-medium">Name</label>
-          <input {...register('name')} className="input" />
-          <p className="text-sm text-red-500">{errors.name?.message}</p>
-        </div>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="space-y-6 border rounded p-6"
+    >
+      {/* Category */}
+      <div>
+        <label>Category</label>
+        <select {...register("category")} className="input">
+          <option value="">Select</option>
+          {categories.map((c) => (
+            <option key={c} value={c}>
+              {c}
+            </option>
+          ))}
+        </select>
+        <p className="text-red-500 text-sm">{errors.category?.message}</p>
+      </div>
 
-        {/* Bio */}
-        <div>
-          <label className="block font-medium">Bio</label>
-          <textarea {...register('bio')} className="input h-24" />
-          <p className="text-sm text-red-500">{errors.bio?.message}</p>
+      {/* Genres */}
+      <div>
+        <label>Genres</label>
+        <div className="grid grid-cols-2 gap-2">
+          {genres.map((g) => (
+            <label key={g} className="flex gap-2">
+              <input type="checkbox" value={g} {...register("genres")} />
+              {g}
+            </label>
+          ))}
         </div>
+      </div>
 
-        {/* Category Multi-select */}
-        <div>
-          <label className="block font-medium mb-1">Categories</label>
-          <div className="grid grid-cols-2 gap-2">
-            {categories.map((cat) => (
-              <label key={cat} className="flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  value={cat}
-                  {...register('categories')}
-                />
-                {cat}
-              </label>
-            ))}
+      {/* Bio */}
+      <div>
+        <label>Bio</label>
+        <textarea {...register("bio")} className="input h-24" />
+        <p className="text-red-500 text-sm">{errors.bio?.message}</p>
+      </div>
+
+      {/* Experience */}
+      <div>
+        <label>Experience (Years)</label>
+        <input
+          type="number"
+          {...register("experienceYears", { valueAsNumber: true })}
+          className="input"
+        />
+      </div>
+
+      {/* Price Range */}
+      <div className="grid grid-cols-2 gap-4">
+        <input
+          type="number"
+          placeholder="Min Price"
+          {...register("priceRange.min", { valueAsNumber: true })}
+          className="input"
+        />
+        <input
+          type="number"
+          placeholder="Max Price"
+          {...register("priceRange.max", { valueAsNumber: true })}
+          className="input"
+        />
+      </div>
+
+      {/* UploadThing Image */}
+      <div>
+        <label className="block mb-2">Profile Image</label>
+
+        {!previewUrl ? (
+          <UploadButton<OurFileRouter, "artistMedia">
+            endpoint="artistMedia"
+            onClientUploadComplete={(res) => {
+              if (!res || res.length === 0) return
+
+              setValue("media.profileImage", res[0].ufsUrl, {
+                shouldValidate: true,
+              })
+              setPreviewUrl(res[0].ufsUrl)
+            }}
+            onUploadError={(error: Error) => {
+              alert(error.message)
+            }}
+          />
+        ) : (
+          <div className="relative w-40">
+            <img
+              src={previewUrl}
+              alt="Profile preview"
+              className="w-40 h-40 object-cover rounded border"
+            />
+
+            <button
+              type="button"
+              onClick={() => {
+                setPreviewUrl(null)
+                setValue("media.profileImage", null)
+              }}
+              className="absolute top-1 right-1 bg-red-600 text-white text-xs px-2 py-1 rounded"
+            >
+              Delete
+            </button>
           </div>
-          <p className="text-sm text-red-500">{errors.categories?.message}</p>
-        </div>
+        )}
+      </div>
 
-        {/* Languages Multi-select */}
-        <div>
-          <label className="block font-medium mb-1">Languages Spoken</label>
-          <div className="grid grid-cols-2 gap-2">
-            {languages.map((lang) => (
-              <label key={lang} className="flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  value={lang}
-                  {...register('languages')}
-                />
-                {lang}
-              </label>
-            ))}
-          </div>
-          <p className="text-sm text-red-500">{errors.languages?.message}</p>
-        </div>
-
-        {/* Price Range */}
-        <div>
-          <label className="block font-medium">Fee Range</label>
-          <select {...register('priceRange')} className="input">
-            <option value="">Select range</option>
-            {priceOptions.map((opt) => (
-              <option key={opt} value={opt}>{opt}</option>
-            ))}
-          </select>
-          <p className="text-sm text-red-500">{errors.priceRange?.message}</p>
-        </div>
-
-        {/* Location */}
-        <div>
-          <label className="block font-medium">Location</label>
-          <input {...register('location')} className="input" />
-          <p className="text-sm text-red-500">{errors.location?.message}</p>
-        </div>
-
-        {/* Image Upload */}
-        <div>
-          <label className="block font-medium">Profile Image (Optional)</label>
-          <input type="file" {...register('image')} className="mt-1 border-1 rounded" />
-        </div>
-
-        {/* Submit */}
-        <button type="submit" className="bg-purple-600 text-white px-6 py-2 rounded hover:bg-purple-700">
-          Submit
-        </button>
+      <button className="bg-purple-600 text-white px-6 py-2 rounded">
+        Submit
+      </button>
     </form>
-  );
+  )
 }
