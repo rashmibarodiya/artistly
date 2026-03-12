@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 
-export default function RoleRedirectPage() {
-  const { data: session, status } = useSession();
+function RoleRedirectContent() {
+  const { data: session, status,update } = useSession();
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -19,8 +19,10 @@ export default function RoleRedirectPage() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ role }),
-      }).then(() => {
+      }).then(async () => {
+await update()
         if (role === "ARTIST") {
+        
           router.push("/onboard");
         } else {
           router.push("/explore");
@@ -37,5 +39,13 @@ export default function RoleRedirectPage() {
         </h2>
       </div>
     </div>
+  );
+}
+
+export default function RoleRedirectPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <RoleRedirectContent />
+    </Suspense>
   );
 }

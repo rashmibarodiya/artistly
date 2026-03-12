@@ -3,7 +3,7 @@ import { IBooking } from "../../types/Booking";
 
 const BookingSchema = new Schema<IBooking>(
   {
-    artistId: { type: Schema.Types.ObjectId, ref: "ArtistProfile", required: true },
+    artistId: { type: Schema.Types.ObjectId, ref: "Artist", required: true },
     userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
     eventType: { type: String, required: true },
     eventDate: { type: Date, required: true },

@@ -69,7 +69,7 @@ export const authOptions: NextAuthOptions = {
           await User.create({
             name: user.name,
             email: user.email,
-            role: "USER", // default role
+            role: user.role || "USER", // default role
           });
         }
       }
@@ -77,17 +77,17 @@ export const authOptions: NextAuthOptions = {
       return true;
     },
 
-    async jwt({ token, user }) {
+    async jwt({ token }) {
       // Runs on login
       await connectDB()
+      const dbUser = await User.findOne({ email: token.email });
 
-      if (user) {
-        const dbUser = await User.findOne({email:user.email})
-        token.id = dbUser.id;
-        token.role = dbUser.role;
-        token.name = dbUser.name;
-        token.email = dbUser.email;
-      }
+
+      token.id = dbUser.id;
+      token.role = dbUser.role;
+      token.name = dbUser.name;
+      token.email = dbUser.email;
+
 
       return token;
     },

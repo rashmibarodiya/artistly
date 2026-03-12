@@ -3,32 +3,25 @@
 import { artistSchema, ArtistInput } from "@/db/validators/artist";
 import { Artist } from "@/db/schema/Artist";
 import { connectDB } from "@/db/connect";
-import { Types } from "mongoose"
-// import { auth } from "@/auth"; // or next-auth
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import { Types } from "mongoose";
 
 export async function createArtist(data: ArtistInput) {
-  console.log("🟣 createArtist called");
-  console.log("📦 incoming data:", data);
-
-  // 🔐 get user from auth
-  // const session = await auth();
-  // if (!session?.user?.id) {
-  //   throw new Error("Unauthorized");
-  // }
-  // const userId = session.user.id;
-
-  
-const userId = new Types.ObjectId() // ⚠️ replace with real auth ASAP
-
   await connectDB();
 
+  const session = await getServerSession(authOptions);
+
+  if (!session?.user?.id) {
+    throw new Error("Unauthorized");
+  }
+
+  const userId = new Types.ObjectId(session.user.id);
+
   try {
-    // ✅ validate payload
     const validated = await artistSchema.validate(data, {
       abortEarly: false,
     });
-
-    console.log("✅ data validated");
 
     const artist = await Artist.create({
       userId,
@@ -48,15 +41,13 @@ const userId = new Types.ObjectId() // ⚠️ replace with real auth ASAP
       },
     });
 
-    console.log("🎉 artist created:", artist._id.toString());
-
-   return {
-  id: artist._id.toString(),
-  category: artist.category,
-  success : true
-};
+    return {
+      id: artist._id.toString(),
+      category: artist.category,
+      success: true,
+    };
   } catch (error) {
-    console.error("❌ createArtist failed:", error);
-    throw error; // NEVER swallow server errors
+    console.error("createArtist failed:", error);
+    throw error;
   }
 }

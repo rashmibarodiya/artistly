@@ -6,7 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import { UploadButton } from "@uploadthing/react"
 import type { OurFileRouter } from "@/app/api/uploadthing/core"
 import { artistSchema } from "@/db/validators/artist"
-import { createArtist } from "@/db/actions/artist"
+import { createArtist } from "@/db/actions/createArtist"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import type * as yup from "yup"
@@ -17,6 +17,7 @@ const categories = ["Singer", "Dancer", "DJ", "Band"]
 const genres = ["Bollywood", "Classical", "Rock", "Pop", "Hip Hop"]
 
 export default function ArtistForm() {
+
   const router = useRouter()
   const [previewUrl, setPreviewUrl] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
@@ -48,7 +49,7 @@ export default function ArtistForm() {
     try {
       setLoading(true)
       const res = await createArtist(data)
-      if(res?.success)router.push('/artist/dashboard')
+      if(res?.success)router.push('/dashboard/artist')
       alert("🎉 Artist profile created successfully!")
     } catch (error) {
       console.error(error)

@@ -8,9 +8,9 @@ export default async function Home() {
   const session = await getServerSession(authOptions);
  console.log("session :::: ",session?.user)
   if (session?.user?.role === "ARTIST") {
-    
+    console.log("whats going on ******" )
     // return<ArtistLanding/>
-    redirect("/artist/dashboard");
+    redirect("/dashboard/artist");
   }
 
   // If USER or not logged in

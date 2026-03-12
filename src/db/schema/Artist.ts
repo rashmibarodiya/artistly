@@ -3,7 +3,7 @@ import { IArtist } from "../../types/Artist";
 
 const ArtistSchema = new Schema<IArtist>(
   {
-    userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
+    userId: { type: Schema.Types.ObjectId, ref: "User", required: true, unique:true },
     category: { type: String, required: true },
     genres: [String],
     priceRange: {
