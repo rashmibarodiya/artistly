@@ -27,6 +27,5 @@ export async function toggleAvailability(userId: string, date: Date) {
     date,
     isAvailable: true,
   });
-
   return availability;
 }

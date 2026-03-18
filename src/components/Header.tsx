@@ -54,7 +54,7 @@ export default function Header() {
           {/* 👤 USER */}
           {role === "USER" && (
             <>
-              <Link href="/dashboard/user" className="hover:text-yellow-400 transition">
+              <Link href="/user/mybookings" className="hover:text-yellow-400 transition">
                 My Bookings
               </Link>
               <button

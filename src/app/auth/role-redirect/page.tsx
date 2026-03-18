@@ -5,7 +5,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 
 function RoleRedirectContent() {
-  const { data: session, status,update } = useSession();
+  const { data: session, status, update } = useSession();
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -20,12 +20,12 @@ function RoleRedirectContent() {
         },
         body: JSON.stringify({ role }),
       }).then(async () => {
-await update()
+        await update()
         if (role === "ARTIST") {
-        
+
           router.push("/onboard");
         } else {
-          router.push("/explore");
+          router.push("/");
         }
       });
     }

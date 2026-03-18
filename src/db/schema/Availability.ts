@@ -5,7 +5,7 @@ const AvailabilitySchema = new Schema<IAvailability>(
   {
     artistId: {
       type: Schema.Types.ObjectId,
-      ref: "ArtistProfile",
+      ref: "Artist",
       required: true,
     },
     date: {

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import axios from "axios";
+import { getSession } from "next-auth/react";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -12,22 +12,29 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleRegister = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError("");
+  const handleLogin = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setError("");
 
-    try {
-      await axios.post("/api/auth/register", {
-        email,
-        password,
-      });
+  const res = await signIn("credentials", {
+    email,
+    password,
+    redirect: false,
+  });
 
-      router.push("/login");
-    } catch (err: any) {
-      setError(err?.response?.data?.error || "Something went wrong");
-    }
-  };
+  if (res?.error) {
+    setError(res.error);
+    return;
+  }
 
+  const session = await getSession();
+
+  if (session?.user?.role === "ARTIST") {
+    router.push("/dashboard/artist");
+  } else {
+    router.push("/");
+  }
+};
   return (
     <section className="w-full bg-gradient-to-br from-purple-900 via-purple-800 to-indigo-900 py-24 px-6 text-white">
 
@@ -37,7 +44,7 @@ export default function LoginPage() {
           Join Artistly
         </h2>
 
-        <form onSubmit={handleRegister} className="space-y-5">
+        <form onSubmit={handleLogin} className="space-y-5">
 
           {/* Email */}
           <input
@@ -59,7 +66,7 @@ export default function LoginPage() {
             required
           />
 
-          
+
 
           {error && (
             <p className="text-red-400 text-sm">{error}</p>
@@ -70,7 +77,7 @@ export default function LoginPage() {
             type="submit"
             className="w-full bg-gradient-to-r from-pink-500 to-yellow-400 text-black py-3 rounded-full font-semibold hover:scale-105 transition"
           >
-            Don't have an account
+            Login
           </button>
         </form>
 
@@ -83,16 +90,26 @@ export default function LoginPage() {
 
         {/* Google Auth */}
         <button
-  type="button"
-  onClick={() =>
-    signIn("google", {
-      callbackUrl: ``,
-    })
-  }
-  className="w-full bg-white/20 backdrop-blur-md border border-white/30 text-white p-3 rounded-xl hover:bg-white/30 transition"
->
-  Continue with Google
-</button>
+          type="button"
+          onClick={() =>
+            signIn("google", {
+              callbackUrl: ``,
+            })
+          }
+          className="w-full bg-white/20 backdrop-blur-md border border-white/30 text-white p-3 rounded-xl hover:bg-white/30 transition"
+        >
+          Continue with Google
+        </button>
+         {/* login */}
+        <button
+          type="button"
+          onClick={() =>
+            router.push("/register")
+          }
+          className="w-full bg-white/20 backdrop-blur-md border border-white/30 text-white p-3 rounded-xl hover:bg-white/30 transition"
+        >
+          Don't have an account
+        </button>
       </div>
     </section>
   );

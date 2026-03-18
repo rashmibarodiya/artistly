@@ -3,6 +3,7 @@ import {Booking} from "@/db/schema/Booking";
 import { Artist } from "@/db/schema/Artist";
 import { connectDB } from "@/db/connect";
 import mongoose from "mongoose";
+
 export async function getArtistBookings(userId: string) {
   await connectDB();
 

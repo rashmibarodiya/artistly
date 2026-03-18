@@ -11,24 +11,40 @@ export default function RegisterPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState<"USER" | "ARTIST">("USER");
+  const [name, setName] = useState("");
   const [error, setError] = useState("");
 
-  const handleRegister = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError("");
+ const handleRegister = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setError("");
 
-    try {
-      await axios.post("/api/auth/register", {
-        email,
-        password,
-        role,
-      });
+  try {
+    await axios.post("/api/auth/register", {
+      email,
+      name,
+      password,
+      role,
+    });
 
-      router.push("/login");
-    } catch (err: any) {
-      setError(err?.response?.data?.error || "Something went wrong");
+    // 🔥 AUTO LOGIN AFTER REGISTER
+    const res = await signIn("credentials", {
+      email,
+      password,
+      redirect: false,
+    });
+
+    if (res?.error) {
+      setError(res.error);
+      return;
     }
-  };
+
+    // ✅ now session exists
+    router.push(`/auth/role-redirect?role=${role}`);
+
+  } catch (err: any) {
+    setError(err?.response?.data?.error || "Something went wrong");
+  }
+};
 
   return (
     <section className="w-full bg-gradient-to-br from-purple-900 via-purple-800 to-indigo-900 py-24 px-6 text-white">
@@ -50,7 +66,14 @@ export default function RegisterPage() {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-
+          <input
+            type="text"
+            placeholder="Full Name"
+            className="w-full px-4 py-3 rounded-lg bg-white/20 border border-white/20 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-300"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
           {/* Password */}
           <input
             type="password"
@@ -71,11 +94,10 @@ export default function RegisterPage() {
                   type="button"
                   key={r}
                   onClick={() => setRole(r as "USER" | "ARTIST")}
-                  className={`flex-1 py-2 rounded-full border transition ${
-                    role === r
-                      ? "bg-yellow-400 text-black border-yellow-400"
-                      : "bg-white/20 border-white/30 hover:bg-white/30"
-                  }`}
+                  className={`flex-1 py-2 rounded-full border transition ${role === r
+                    ? "bg-yellow-400 text-black border-yellow-400"
+                    : "bg-white/20 border-white/30 hover:bg-white/30"
+                    }`}
                 >
                   {r}
                 </button>
@@ -105,16 +127,25 @@ export default function RegisterPage() {
 
         {/* Google Auth */}
         <button
-  type="button"
-  onClick={() =>
-    signIn("google", {
-      callbackUrl: `/auth/role-redirect?role=${role}`,
-    })
-  }
-  className="w-full bg-white/20 backdrop-blur-md border border-white/30 text-white p-3 rounded-xl hover:bg-white/30 transition"
->
-  Continue with Google
-</button>
+          type="button"
+          onClick={() =>
+            signIn("google", {
+              callbackUrl: `/auth/role-redirect?role=${role}`,
+            })
+          }
+          className="w-full bg-white/20 backdrop-blur-md border border-white/30 text-white p-3 rounded-xl hover:bg-white/30 transition"
+        >
+          Continue with Google
+        </button>
+        <button
+          type="button"
+          onClick={() =>
+            router.push("/login")
+          }
+          className="w-full bg-white/20 backdrop-blur-md border border-white/30 text-white p-3 rounded-xl hover:bg-white/30 transition"
+        >
+          Already have an account
+        </button>
       </div>
     </section>
   );

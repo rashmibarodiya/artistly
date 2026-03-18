@@ -20,7 +20,7 @@ export const authOptions: NextAuthOptions = {
         }
 
         await connectDB();
-
+console.log("i am here ")
         const user = await User.findOne({ email: credentials.email });
 
         if (!user) {

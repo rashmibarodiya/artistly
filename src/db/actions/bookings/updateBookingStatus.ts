@@ -2,6 +2,7 @@
 
 import { connectDB } from "@/db/connect";
 import { Booking } from "@/db/schema/Booking";
+import { Availability } from "@/db/schema/Availability";
 
 export async function updateBookingStatus(
   bookingId: string,
@@ -23,6 +24,22 @@ export async function updateBookingStatus(
   booking.status = status;
 
   await booking.save();
+  if (status === "ACCEPTED") {
+  await Availability.findOneAndUpdate(
+    {
+      artistId: booking.artistId,
+      date: booking.eventDate,
+    },
+    {
+      isAvailable: false,
+      bookingId: booking._id,
+    },
+    {
+      upsert: true, 
+      new: true,
+    }
+  );
+}
 
   return { success: true };
 }

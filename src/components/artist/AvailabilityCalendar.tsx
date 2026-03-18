@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { toggleAvailability } from "@/db/actions/availability/toggleAvailability";
-
 export default function AvailabilityCalendar({
   availability,
   userId,
@@ -13,14 +12,13 @@ export default function AvailabilityCalendar({
     if (!date) return;
 
     await toggleAvailability(userId, new Date(date));
-
     window.location.reload();
   }
 
   return (
-    <div className="bg-gray-800 p-6 rounded-2xl">
+    <div className="bg-white/10 backdrop-blur-lg p-6 rounded-2xl border border-white/20">
 
-      <h2 className="text-2xl font-semibold mb-4">
+      <h2 className="text-2xl font-semibold mb-6">
         Availability
       </h2>
 
@@ -30,24 +28,23 @@ export default function AvailabilityCalendar({
           type="date"
           value={date}
           onChange={(e) => setDate(e.target.value)}
-          className="text-black p-2 rounded"
+          className="bg-white/20 text-white p-2 rounded outline-none"
         />
 
         <button
           onClick={handleAdd}
-          className="bg-purple-600 px-4 py-2 rounded"
+          className="bg-purple-500 px-4 py-2 rounded hover:bg-purple-600 transition"
         >
           Toggle
         </button>
       </div>
 
       {/* Show existing */}
-      <div className="space-y-2">
-
+      <div className="space-y-3">
         {availability.map((a: any) => (
           <div
             key={a._id}
-            className="flex justify-between border-b border-gray-700 pb-2"
+            className="flex justify-between p-3 rounded-lg bg-white/5 border border-white/10"
           >
             <span>
               {new Date(a.date).toDateString()}
@@ -56,15 +53,14 @@ export default function AvailabilityCalendar({
             <span
               className={
                 a.isAvailable
-                  ? "text-green-400"
-                  : "text-red-400"
+                  ? "text-green-300"
+                  : "text-red-300"
               }
             >
               {a.isAvailable ? "Available" : "Blocked"}
             </span>
           </div>
         ))}
-
       </div>
     </div>
   );
