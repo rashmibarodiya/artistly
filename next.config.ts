@@ -1,12 +1,13 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
   images: {
-    domains: ["xfc3shom77.ufs.sh"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**", // or restrict to your domains
+      },
+    ],
   },
 };
 

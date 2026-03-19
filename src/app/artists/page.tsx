@@ -1,8 +1,8 @@
 import { getArtists } from "@/db/actions/getArtist";
 import ArtistCard from "../../components/ArtistsCard";
 import Filter from "../../components/Filters";
-
-export default async function ArtistListingPage({searchParams}:any) {
+import { Suspense } from "react";
+export default async function ArtistListingPage({ searchParams }: any) {
 
   const artists = await getArtists(searchParams);
 
@@ -12,8 +12,10 @@ export default async function ArtistListingPage({searchParams}:any) {
       <h1 className="text-5xl font-semibold text-center">
         Browse Artists
       </h1>
+      <Suspense fallback={<div>Loading filters...</div>}>
+        <Filter searchParams={searchParams} />
+      </Suspense>
 
-      <Filter />
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
 

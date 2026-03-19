@@ -1,20 +1,19 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
+
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-export default function Filter() {
+export default function Filter({ searchParams }: any) {
   const router = useRouter();
-  const searchParams = useSearchParams();
 
-  const [category, setCategory] = useState(searchParams.get("category") || "");
-  const [minPrice, setMinPrice] = useState(searchParams.get("minPrice") || "");
-  const [genre, setGenre] = useState(searchParams.get("genre") || "");
-  const [rating, setRating] = useState(searchParams.get("rating") || "");
+  const [category, setCategory] = useState(searchParams.category || "");
+  const [minPrice, setMinPrice] = useState(searchParams.minPrice || "");
+  const [genre, setGenre] = useState(searchParams.genre || "");
+  const [rating, setRating] = useState(searchParams.rating || "");
   const [verified, setVerified] = useState(
-    searchParams.get("verified") === "true"
+    searchParams.verified === "true"
   );
-
   const applyFilters = () => {
     const params = new URLSearchParams();
 
