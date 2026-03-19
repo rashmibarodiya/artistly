@@ -4,7 +4,7 @@ export interface IArtist {
   _id: Types.ObjectId
   userId: Types.ObjectId          // ref User
 
-  category: "Singer" | "DJ" | "Dancer" | "Speaker" | "Band"
+  category: "Singer" | "DJ" | "Dancer" | "Speaker" | "Instrumentalist"
   genres?: string[]
 
   priceRange: {

@@ -48,7 +48,7 @@ export default function Filter() {
           <option value="Singer" className="text-black">Singer</option>
           <option value="DJ" className="text-black">DJ</option>
           <option value="Dancer" className="text-black">Dancer</option>
-          <option value="Band" className="text-black">Band</option>
+          <option value="Instrumentalist" className="text-black">Instrumentalist</option>
         </select>
       </div>
       {/* Genre */}

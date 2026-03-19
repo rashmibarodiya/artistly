@@ -1,9 +1,16 @@
 "use client";
 
 import { useSession } from "next-auth/react";
+import { useState } from "react";
+import EditProfile from "./EditProfile";
+import { useRouter } from "next/navigation";
+
+
 
 export default function ArtistProfile({ artist }: any) {
   const { data: session } = useSession();
+  const router = useRouter();
+  // const [openEdit, setOpenEdit] = useState(false);
 
   const isOwner =
     session?.user?.id === artist?.userId?._id?.toString();
@@ -35,11 +42,20 @@ export default function ArtistProfile({ artist }: any) {
 
         {/* 🔥 Edit button */}
         {isOwner && (
-          <button className="ml-auto bg-yellow-400 text-black px-4 py-2 rounded-xl font-semibold">
+          <button
+            onClick={() => router.push(`/EditProfile/${artist._id}`)}
+            className="ml-auto bg-yellow-400 text-black px-4 py-2 rounded-xl font-semibold cursor-pointer"
+          >
             Edit Profile
           </button>
         )}
       </div>
+      {/* {openEdit && (
+        <EditProfile
+          artist={artist}
+          onClose={() => setOpenEdit(false)}
+        />
+      )} */}
 
       {/* 🔥 Bio */}
       <div>
