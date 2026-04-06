@@ -1,11 +1,5 @@
 import mongoose from "mongoose";
 
-const MONGODB_URI = process.env.MONGODB_URI as string;
-
-if (!MONGODB_URI) {
-  throw new Error("❌ MONGODB_URI is not defined in environment variables");
-}
-
 let cached = (global as any).mongoose;
 
 if (!cached) {
@@ -16,6 +10,12 @@ if (!cached) {
 }
 
 export async function connectDB() {
+  const MONGODB_URI = process.env.MONGODB_URI;
+
+  if (!MONGODB_URI) {
+    throw new Error("❌ MONGODB_URI is not defined in environment variables");
+  }
+
   console.log("🟡 connectDB called");
 
   if (cached.conn) {

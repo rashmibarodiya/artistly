@@ -13,7 +13,7 @@ export default function UserLanding() {
       <div className="relative max-w-5xl mx-auto backdrop-blur-xl bg-white/10 border border-white/20 rounded-3xl p-16 shadow-2xl text-center">
 
         <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight">
-          Book Extraordinary Talent
+          Book Amazing Talent
         </h1>
 
         <p className="mt-6 text-xl text-purple-200 max-w-2xl mx-auto">
@@ -30,7 +30,7 @@ export default function UserLanding() {
 
           <Link
             href="/register"
-            className="bg-white/20 backdrop-blur-md border border-white/30 px-8 py-3 rounded-full hover:bg-white hover:text-purple-900 transition"
+            className="bg-gradient-to-r  from-purple-900 via-purple-800 to-indigo-900 text-white shadow-lg p-3 cursor-pointer hover:bg-purple/30 transition border border-white/30 px-8 py-3 rounded-full hover:bg-white hover:text-white-900 "
           >
             Join Now
           </Link>

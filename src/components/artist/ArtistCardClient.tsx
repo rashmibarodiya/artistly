@@ -67,7 +67,7 @@ export default function ArtistCardClient({
 
           {/* 🔥 Booking Button */}
           {isUser && (
-            <div onClick={(e) => e.stopPropagation()} className="pt-2">
+            <div className="pt-2">
               <BookingButton artist={artist} />
             </div>
           )}
@@ -80,9 +80,7 @@ export default function ArtistCardClient({
       {/* 🔥 MODAL */}
       {open && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-50">
-          
           <div className="max-h-[90vh] overflow-y-auto w-full max-w-4xl p-4">
-            
             {/* Close button */}
             <button
               onClick={() => setOpen(false)}

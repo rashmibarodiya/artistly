@@ -26,9 +26,17 @@ export default function Filter({ searchParams }: any) {
     router.push(`/artists?${params.toString()}`);
   };
 
-  const clearFilters = () => {
-    router.push("/artists");
-  };
+ const clearFilters = () => {
+  // reset UI state
+  setCategory("");
+  setMinPrice("");
+  setGenre("");
+  setRating("");
+  setVerified(false);
+
+  // reset URL
+  router.push("/artists");
+};
 
   const inputStyle =
     "bg-white/10 text-white placeholder-gray-300 border border-white/20 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-400 transition";
@@ -60,7 +68,7 @@ export default function Filter({ searchParams }: any) {
         >
           <option value="" className="text-black">All</option>
           <option value="Bollywood" className="text-black">Bollywood</option>
-          <option value="hip-hop" className="text-black">Hip Hop</option>
+          <option value="Hip Hop" className="text-black">Hip Hop</option>
           <option value="Classical" className="text-black">Classical</option>
           <option value="Rock" className="text-black">Rock</option>
           <option value="Pop" className="text-black">Pop</option>
@@ -92,7 +100,7 @@ export default function Filter({ searchParams }: any) {
       </div> */}
 
       {/* Rating */}
-      <div className="flex flex-col">
+      {/* <div className="flex flex-col">
         <p className="text-xs text-gray-300 mb-1">Rating</p>
         <select
           className={`${inputStyle} cursor-pointer`}
@@ -103,10 +111,10 @@ export default function Filter({ searchParams }: any) {
           <option value="3" className="text-black">3+</option>
           <option value="4" className="text-black">4+</option>
         </select>
-      </div>
+      </div> */}
 
       {/* Verified */}
-      <label className="flex items-center gap-2 text-gray-300 cursor-pointer">
+      {/* <label className="flex items-center gap-2 text-gray-300 cursor-pointer">
         <input
           type="checkbox"
           checked={verified}
@@ -114,7 +122,7 @@ export default function Filter({ searchParams }: any) {
           className="accent-yellow-400"
         />
         Verified
-      </label>
+      </label> */}
 
       {/* Buttons */}
       <div className="flex gap-3">

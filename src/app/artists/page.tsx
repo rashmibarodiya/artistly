@@ -1,11 +1,16 @@
 import { getArtists } from "@/db/actions/getArtist";
 import ArtistCard from "../../components/ArtistsCard";
 import Filter from "../../components/Filters";
+import AISearch from "@/components/ai/AISearch"
 import { Suspense } from "react";
-export default async function ArtistListingPage({ searchParams }: any) {
+export default async function ArtistListingPage({
+  searchParams,
+}: {
+  searchParams: Promise<any>;
+}) {
+  const params = await searchParams; // ✅ FIX
 
-  const artists = await getArtists(searchParams);
-
+  const artists = await getArtists(params);
   return (
     <div className="w-full bg-gradient-to-br from-purple-900 via-purple-800 to-indigo-900 py-12 px-6 text-white space-y-8">
 
@@ -13,9 +18,9 @@ export default async function ArtistListingPage({ searchParams }: any) {
         Browse Artists
       </h1>
       <Suspense fallback={<div>Loading filters...</div>}>
-        <Filter searchParams={searchParams} />
+        <Filter searchParams={params} />
       </Suspense>
-
+      <AISearch/>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
 

@@ -4,6 +4,8 @@ import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { getSession } from "next-auth/react";
+import google from "../../../public/google.svg"
+import Image from "next/image";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -96,9 +98,15 @@ export default function LoginPage() {
               callbackUrl: ``,
             })
           }
-          className="w-full bg-white/20 backdrop-blur-md border border-white/30 text-white p-3 rounded-xl hover:bg-white/30 transition"
-        >
-          Continue with Google
+  className="w-full flex items-center justify-center gap-3 bg-gradient-to-r from-purple-900 via-purple-800 to-indigo-900 text-white shadow-lg cursor-pointer
+  p-3 rounded-xl hover:bg-white/30 transition"        >
+         <Image
+            src={google}
+            alt="Google logo"
+            width={20}
+            height={20}
+          />
+          <span>Continue with Google</span>
         </button>
          {/* login */}
         <button
@@ -106,7 +114,7 @@ export default function LoginPage() {
           onClick={() =>
             router.push("/register")
           }
-          className="w-full bg-white/20 backdrop-blur-md border border-white/30 text-white p-3 rounded-xl hover:bg-white/30 transition"
+          className="w-full mt-3 bg-gradient-to-r  from-purple-900 via-purple-800 to-indigo-900 text-white shadow-lg p-3 rounded-xl cursor-pointer hover:bg-purple/30 transition"
         >
           Don't have an account
         </button>

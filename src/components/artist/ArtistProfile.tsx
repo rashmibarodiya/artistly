@@ -4,6 +4,7 @@ import { useSession } from "next-auth/react";
 import { useState } from "react";
 import EditProfile from "./EditProfile";
 import { useRouter } from "next/navigation";
+import BookingButton from "../BookingButton";
 
 
 
@@ -41,14 +42,23 @@ export default function ArtistProfile({ artist }: any) {
         </div>
 
         {/* 🔥 Edit button */}
-        {isOwner && (
-          <button
-            onClick={() => router.push(`/EditProfile/${artist._id}`)}
-            className="ml-auto bg-yellow-400 text-black px-4 py-2 rounded-xl font-semibold cursor-pointer"
-          >
-            Edit Profile
-          </button>
-        )}
+        <div className="ml-auto flex gap-3">
+    
+    {/* ✅ Booking Button (only for users, not owner) */}
+    {!isOwner && session && (
+      <BookingButton artist={artist} />
+    )}
+
+    {/* ✅ Edit Button (only owner) */}
+    {isOwner && (
+      <button
+        onClick={() => router.push(`/EditProfile/${artist._id}`)}
+        className="bg-yellow-400 text-black px-4 py-2 rounded-xl font-semibold cursor-pointer"
+      >
+        Edit Profile
+      </button>
+    )}
+  </div>
       </div>
       {/* {openEdit && (
         <EditProfile

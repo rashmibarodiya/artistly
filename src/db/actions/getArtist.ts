@@ -20,13 +20,14 @@ export async function getArtists(filters: any = {}) {
     query.genres = { $in: [filters.genre] };
   }
 
-  // 🎯 Price (min only for now)
   if (filters.minPrice) {
-    query["priceRange.min"] = {
-      $gte: Number(filters.minPrice),
-    };
-  }
+  const price = Number(filters.minPrice);
 
+  query.$and = [
+    { "priceRange.min": { $lte: price } },
+    { "priceRange.max": { $gte: price } },
+  ];
+}
   // 🎯 Rating
   if (filters.rating) {
     query["rating.average"] = {

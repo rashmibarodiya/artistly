@@ -41,18 +41,23 @@ export default function BookingButton({ artist }: any) {
 
   return (
     <>
+      {/* 🔥 FIX IS HERE */}
       <button
-        onClick={() => setOpen(true)}
+        onClick={(e) => {
+          e.stopPropagation(); // ✅ prevents opening Artist modal
+          setOpen(true);
+        }}
         className="mt-2 w-full bg-purple-600 text-white py-2 rounded hover:bg-purple-700"
       >
         Send Booking Request
       </button>
 
       {open && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black/60 z-50">
-
+        <div
+          onClick={(e) => e.stopPropagation()} // optional safety
+          className="fixed inset-0 flex items-center justify-center bg-black/60 z-50"
+        >
           <div className="bg-white text-black p-6 rounded-xl w-[400px] space-y-4">
-
             <h2 className="text-xl font-semibold">
               Book {artist.category}
             </h2>
@@ -88,7 +93,6 @@ export default function BookingButton({ artist }: any) {
             <input
               type="number"
               name="quotedPrice"
-              placeholder="Budget"
               className="w-full border p-2 rounded"
               value={form.quotedPrice}
               onChange={handleChange}
@@ -102,7 +106,6 @@ export default function BookingButton({ artist }: any) {
             />
 
             <div className="flex justify-between">
-
               <button
                 onClick={() => setOpen(false)}
                 className="px-4 py-2 border rounded"
@@ -116,11 +119,8 @@ export default function BookingButton({ artist }: any) {
               >
                 {loading ? "Sending..." : "Send Request"}
               </button>
-
             </div>
-
           </div>
-
         </div>
       )}
     </>

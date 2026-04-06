@@ -4,6 +4,8 @@ import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import google from "../../../public/google.svg"
+import Image from "next/image";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -14,37 +16,37 @@ export default function RegisterPage() {
   const [name, setName] = useState("");
   const [error, setError] = useState("");
 
- const handleRegister = async (e: React.FormEvent) => {
-  e.preventDefault();
-  setError("");
+  const handleRegister = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
 
-  try {
-    await axios.post("/api/auth/register", {
-      email,
-      name,
-      password,
-      role,
-    });
+    try {
+      await axios.post("/api/auth/register", {
+        email,
+        name,
+        password,
+        role,
+      });
 
-    // 🔥 AUTO LOGIN AFTER REGISTER
-    const res = await signIn("credentials", {
-      email,
-      password,
-      redirect: false,
-    });
+      // 🔥 AUTO LOGIN AFTER REGISTER
+      const res = await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+      });
 
-    if (res?.error) {
-      setError(res.error);
-      return;
+      if (res?.error) {
+        setError(res.error);
+        return;
+      }
+
+      // ✅ now session exists
+      router.push(`/auth/role-redirect?role=${role}`);
+
+    } catch (err: any) {
+      setError(err?.response?.data?.error || "Something went wrong");
     }
-
-    // ✅ now session exists
-    router.push(`/auth/role-redirect?role=${role}`);
-
-  } catch (err: any) {
-    setError(err?.response?.data?.error || "Something went wrong");
-  }
-};
+  };
 
   return (
     <section className="w-full bg-gradient-to-br from-purple-900 via-purple-800 to-indigo-900 py-24 px-6 text-white">
@@ -133,16 +135,23 @@ export default function RegisterPage() {
               callbackUrl: `/auth/role-redirect?role=${role}`,
             })
           }
-          className="w-full bg-white/20 backdrop-blur-md border border-white/30 text-white p-3 rounded-xl hover:bg-white/30 transition"
+          className="w-full flex items-center justify-center gap-3 bg-gradient-to-r from-purple-900 via-purple-800 to-indigo-900 text-white shadow-lg cursor-pointer
+  p-3 rounded-xl hover:bg-white/30 transition"
         >
-          Continue with Google
+          <Image
+            src={google}
+            alt="Google logo"
+            width={20}
+            height={20}
+          />
+          <span>Continue with Google</span>
         </button>
         <button
           type="button"
           onClick={() =>
             router.push("/login")
           }
-          className="w-full bg-white/20 backdrop-blur-md border border-white/30 text-white p-3 rounded-xl hover:bg-white/30 transition"
+          className="w-full bg-gradient-to-r mt-3 from-purple-900 via-purple-800 to-indigo-900 text-white shadow-lg p-3 rounded-xl cursor-pointer hover:bg-purple/30 transition"
         >
           Already have an account
         </button>

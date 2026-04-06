@@ -21,8 +21,8 @@ export default function Categories() {
                             height={240}
                             className="w-full h-60 object-cover"
                         />
-                        <div className="p-4 bg-gray-100 text-center">
-                            <p className="text-lg font-semibold text-black">{cat.name}</p>
+                        <div className="p-4 bg-gradient-to-r  from-purple-900 via-purple-800 to-indigo-900 text-white text-center">
+                            <p className="text-lg font-semibold text-white">{cat.name}</p>
                         </div>
                     </div>
                 </Link>

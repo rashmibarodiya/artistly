@@ -14,7 +14,7 @@ import type * as yup from "yup"
 type ArtistFormData = yup.InferType<typeof artistSchema>
 
 const categories = ["Singer", "Dancer", "DJ", "Instrumentalist"]
-const genres = ["Bollywood", "Classical", "Rock", "Pop", "Hip Hop"]
+const genres = ["Bollywood", "Classical", "Rock", "Pop", "Hip Hop","EDM"]
 
 export default function ArtistForm() {
 
