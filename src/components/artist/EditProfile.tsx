@@ -35,7 +35,7 @@ export default function EditProfile({ artist, onClose }: any) {
 
  const handleSubmit = async () => {
   try {
-    await fetch(`/api/editProfilea/${artist._id}`, {
+    await fetch(`/api/editProfile/${artist._id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

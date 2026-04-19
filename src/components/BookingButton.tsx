@@ -47,7 +47,9 @@ export default function BookingButton({ artist }: any) {
           e.stopPropagation(); // ✅ prevents opening Artist modal
           setOpen(true);
         }}
-        className="mt-2 w-full bg-purple-600 text-white py-2 rounded hover:bg-purple-700"
+       className="bg-yellow-400 text-black px-4 py-2 rounded-xl font-semibold cursor-pointer
+        transition duration-200 ease-in-out hover:bg-yellow-300 hover:scale-105 hover:shadow-xl 
+        active:scale-95"
       >
         Send Booking Request
       </button>

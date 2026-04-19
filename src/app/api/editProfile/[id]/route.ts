@@ -3,11 +3,15 @@ import {Artist} from "@/db/schema/Artist"
 
 export async function PUT(req: Request, { params }: any) {
   const body = await req.json();
-
   await connectDB();
-console.log("i am not here *****************************8")
+
+  const resolvedParams = await params; // ✅ FIX
+  const id = resolvedParams.id;
+
+  console.log("Updating artist:", id);
+
   const updated = await Artist.findByIdAndUpdate(
-    params.id,
+    id,
     {
       bio: body.bio,
       category: body.category,
