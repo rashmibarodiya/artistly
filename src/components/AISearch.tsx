@@ -37,9 +37,11 @@ export default function AISearch() {
         />
         <button
           onClick={handleSearch}
-          className="bg-purple-600 px-4 py-2 rounded-lg"
+          className="bg-yellow-400 text-black px-4 py-2 rounded-xl font-semibold cursor-pointer
+        transition duration-200 ease-in-out hover:bg-yellow-300 hover:scale-105 hover:shadow-xl 
+        active:scale-95"
         >
-          Search
+          Searchjj
         </button>
       </div>
 

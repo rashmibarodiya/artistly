@@ -50,11 +50,13 @@ export default function AISearch({ isUser = true }: { isUser?: boolean }) {
           placeholder="Describe your event (e.g. Wedding, singer, 20k budget)"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          className="flex-1 p-3 rounded-lg text-black"
+          className="flex-1 p-3 rounded-lg text-white"
         />
         <button
           onClick={handleSearch}
-          className="bg-purple-600 px-4 py-2 rounded-lg hover:bg-purple-700 transition"
+          className="bg-yellow-400 text-black px-4 py-2 rounded-xl font-semibold cursor-pointer
+        transition duration-200 ease-in-out hover:bg-yellow-300 hover:scale-105 hover:shadow-xl 
+        active:scale-95"
         >
           Search
         </button>

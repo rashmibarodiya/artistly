@@ -16,7 +16,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Providers>
         <Header />
          <main className="flex-1">{children}</main>
-        <footer className="p-4 text-center text-sm text-gray-500 mt-8">© 2025 Artistly.com</footer> 
+        <footer className="p-4 text-center text-sm text-gray-500 mt-8">© 2026 Artistly.com</footer> 
         </Providers>
        
       </body>

@@ -49,7 +49,7 @@ export default function UserLanding() {
           {/* USER */}
           {role === "USER" && (
             <Link href="/user/mybookings" className={secondaryBtn}>
-              My Bookings
+              Bookings
             </Link>
           )}
 

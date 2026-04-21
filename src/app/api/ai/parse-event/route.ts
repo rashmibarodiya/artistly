@@ -8,7 +8,7 @@ export async function POST(req: Request) {
   try {
     const { description } = await req.json();
 
-    // 🔥 PROMPT
+    //  PROMPT
     const prompt = `
 You are an AI that extracts structured event data.
 
@@ -33,7 +33,7 @@ Request:
 ${description}
 `;
 
-    // 🔥 Groq setup
+    //  Groq setup
     const groq = new Groq({
       apiKey: process.env.GROQ_API_KEY!,
     });
@@ -64,29 +64,29 @@ ${description}
         throw new Error("Empty response from Groq");
       }
     } catch (err) {
-      console.error("❌ Groq error:", err);
+      console.error("Groq error:", err);
       return Response.json(
         { error: "AI request failed" },
         { status: 500 }
       );
     }
 
-    // 🔥 Parse JSON
+    //  Parse JSON
     let parsed;
     try {
       const cleanText = text.replace(/```json|```/g, "").trim();
       parsed = JSON.parse(cleanText);
     } catch (err) {
-      console.error("❌ JSON parse error:", text);
+      console.error(" JSON parse error:", text);
       return Response.json(
         { error: "AI parsing failed", raw: text },
         { status: 500 }
       );
     }
 
-    console.log("✅ PARSED:", parsed);
+    console.log(" PARSED:", parsed);
 
-    // 🔥 NORMALIZATION
+    //  NORMALIZATION
 
     // Category mapping
     const categoryMap: any = {
@@ -102,7 +102,7 @@ ${description}
     let category =
       categoryMap[parsed.category?.toLowerCase()] || parsed.category;
 
-    // 🔥 EventType → Genre mapping
+    // EventType → Genre mapping
     const eventTypeGenreMap: any = {
       wedding: ["Bollywood", "Sufi", "Classical"],
       party: ["Bollywood", "Pop", "Hip Hop", "EDM"],
@@ -124,9 +124,9 @@ ${description}
       ];
     }
 
-    console.log("🎯 NORMALIZED:", { category, genres });
+    console.log(" NORMALIZED:", { category, genres });
 
-    // 🔥 DB
+    // DB
     await connectDB();
 
     const artists = await Artist.find({
@@ -140,7 +140,7 @@ ${description}
       .limit(10)
       .lean();
 
-    console.log("🎯 FOUND ARTISTS:", artists.length);
+    console.log("FOUND ARTISTS:", artists.length);
 
     return Response.json({
       parsed,
@@ -149,7 +149,7 @@ ${description}
     });
 
   } catch (err) {
-    console.error("❌ API error:", err);
+    console.error(" API error:", err);
     return Response.json(
       { error: "Something went wrong" },
       { status: 500 }

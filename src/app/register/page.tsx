@@ -49,9 +49,9 @@ export default function RegisterPage() {
   };
 
   return (
-    <section className="w-full bg-gradient-to-br from-purple-900 via-purple-800 to-indigo-900 py-24 px-6 text-white">
+    <section className="w-full bg-gradient-to-br from-purple-900 via-purple-800 to-indigo-900 py-14 px-6 text-white">
 
-      <div className="max-w-md mx-auto backdrop-blur-xl bg-white/10 border border-white/20 rounded-3xl p-10 shadow-2xl">
+      <div className="max-w-md mx-auto backdrop-blur-xl bg-white/10 border border-white/20 rounded-3xl p-6 shadow-2xl">
 
         <h2 className="text-3xl font-bold text-center mb-8">
           Join Artistly
@@ -63,7 +63,7 @@ export default function RegisterPage() {
           <input
             type="email"
             placeholder="Email"
-            className="w-full px-4 py-3 rounded-lg bg-white/20 border border-white/20 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-300"
+            className="w-full px-4 py-2 rounded-lg bg-white/20 border border-white/20 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-300"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -71,7 +71,7 @@ export default function RegisterPage() {
           <input
             type="text"
             placeholder="Full Name"
-            className="w-full px-4 py-3 rounded-lg bg-white/20 border border-white/20 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-300"
+            className="w-full px-4 py-2 rounded-lg bg-white/20 border border-white/20 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-300"
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
@@ -80,7 +80,7 @@ export default function RegisterPage() {
           <input
             type="password"
             placeholder="Password"
-            className="w-full px-4 py-3 rounded-lg bg-white/20 border border-white/20 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-300"
+            className="w-full px-4 py-2 rounded-lg bg-white/20 border border-white/20 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-300"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required

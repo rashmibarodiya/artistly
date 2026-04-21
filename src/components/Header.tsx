@@ -20,7 +20,7 @@ export default function Header() {
           Artistly
         </Link>
 
-        {/* 🔥 Mobile Toggle */}
+        {/*  Mobile Toggle */}
         <button
           className="md:hidden"
           onClick={() => setMenuOpen(!menuOpen)}
@@ -28,7 +28,7 @@ export default function Header() {
           {menuOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
 
-        {/* 💻 Desktop Nav */}
+        {/*  Desktop Nav */}
         <nav className="hidden md:flex items-center space-x-6 text-lg font-medium">
           <Link href="/" className="hover:text-yellow-400 transition">
             Home
@@ -52,7 +52,7 @@ export default function Header() {
           {role === "USER" && (
             <>
               <Link href="/user/mybookings" className="hover:text-yellow-400 transition">
-                My Bookings
+                Bookings
               </Link>
               <button onClick={() => signOut()} className="hover:text-red-400">
                 Logout
@@ -73,7 +73,7 @@ export default function Header() {
         </nav>
       </div>
 
-      {/* 🔥 MOBILE MENU */}
+      {/*  MOBILE MENU */}
       <div
         className={`md:hidden absolute top-full left-0 w-full transition-all duration-300 ${
           menuOpen
@@ -105,7 +105,7 @@ export default function Header() {
           {role === "USER" && (
             <>
               <Link onClick={() => setMenuOpen(false)} href="/user/mybookings" className="block hover:text-yellow-400">
-                My Bookings
+                Bookings
               </Link>
               <button
                 onClick={() => {
