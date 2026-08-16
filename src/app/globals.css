@@ -41,6 +41,18 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+
+  /* Marquee theme */
+  --color-marquee-bg: #161219;
+  --color-marquee-bg2: #1d1720;
+  --color-marquee-card: #221c29;
+  --color-marquee-cream: #F4E9DC;
+  --color-marquee-amber: #E8A33D;
+  --color-marquee-velvet: #8B2635;
+  --color-marquee-plum: #4A4458;
+
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -130,4 +142,51 @@
   body {
     @apply text-foreground;
   }
+}
+/* ****************************************************************************** */
+@keyframes bulb-flicker {
+  0%, 100% { text-shadow: 0 0 14px rgba(232,163,61,0.9); }
+  50% { text-shadow: 0 0 2px rgba(232,163,61,0.2); }
+}
+.bulb {
+  display: inline-block;
+  animation: bulb-flicker 2.4s infinite;
+}
+
+.ticket {
+  position: relative;
+  background: var(--color-marquee-card);
+  border: 1px dashed var(--color-marquee-plum);
+  border-radius: 10px;
+}
+.ticket::before, .ticket::after {
+  content: '';
+  position: absolute;
+  width: 16px; height: 16px;
+  background: var(--color-marquee-bg);
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.ticket::before { left: -9px; }
+.ticket::after { right: -9px; }
+
+.panel {
+  position: relative;
+  background: var(--color-marquee-card);
+  border: 1px dashed var(--color-marquee-plum);
+  border-radius: 16px;
+}
+@keyframes bulb-flicker-dot {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 10px rgba(232,163,61,0.8);
+  }
+  50% {
+    opacity: 0.35;
+    box-shadow: 0 0 2px rgba(232,163,61,0.2);
+  }
+}
+.bulb-dot {
+  animation: bulb-flicker-dot 2.4s infinite;
 }
